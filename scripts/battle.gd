@@ -5,6 +5,7 @@ extends Node2D
 const TerrainScript = preload("res://scripts/terrain_map.gd")
 const CounterScript = preload("res://scripts/unit_counter.gd")
 const FogScript = preload("res://scripts/fog_model.gd")
+const SelectionOverlayScript = preload("res://scripts/selection_overlay.gd")
 const SCENARIO_PATH := "res://data/scenarios/test_battle.json"
 const UNIT_RULES_PATH := "res://data/rules/units.json"
 const FOG_REFRESH_SECONDS := 0.1
@@ -15,7 +16,7 @@ const GAME_SPEEDS := [0.5, 1.0, 2.0, 4.0]
 var terrain
 var fog
 var fog_sprite: Sprite2D
-var counters: Array[Node2D] = []
+var counters: Array = []
 var hud: Label
 var paused: bool = false
 var fog_debug: bool = false
@@ -25,6 +26,7 @@ var los_last_ms: float = 0.0
 var selection_origin: Vector2 = Vector2.ZERO
 var selection_active: bool = false
 var show_selection_box: bool = false
+var selection_overlay
 var selection_end: Vector2 = Vector2.ZERO
 
 
@@ -57,6 +59,9 @@ func _ready() -> void:
 	fog_sprite = Sprite2D.new()
 	add_child(fog_sprite)
 	fog.apply_to_sprite(fog_sprite)
+
+	selection_overlay = SelectionOverlayScript.new()
+	add_child(selection_overlay)
 
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
@@ -170,7 +175,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				else:
 					select_at(release_point, mouse.shift_pressed)
 				show_selection_box = false
-				queue_redraw()
+				update_selection_overlay()
 			return
 		if mouse.button_index == MOUSE_BUTTON_RIGHT and mouse.pressed:
 			var destination := get_global_mouse_position()
@@ -183,7 +188,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and selection_active:
 		selection_end = get_global_mouse_position()
 		show_selection_box = true
-		queue_redraw()
+		update_selection_overlay()
 	if event is InputEventKey:
 		var key: InputEventKey = event
 		if not key.pressed or key.echo:
@@ -228,7 +233,7 @@ func zoom_at_cursor(factor: float) -> void:
 
 
 func select_at(world_point: Vector2, additive: bool) -> void:
-	var chosen: Node2D = null
+	var chosen = null
 	for counter in counters:
 		if counter.side == "player" and counter.visible and counter.hit_test(world_point):
 			chosen = counter
@@ -253,11 +258,11 @@ func select_rectangle(rectangle: Rect2, additive: bool) -> void:
 		counter.queue_redraw()
 
 
-func _draw() -> void:
-	if show_selection_box:
-		var rect := Rect2(selection_origin, selection_end - selection_origin).abs()
-		draw_rect(rect, Color(0.7, 0.8, 1.0, 0.16))
-		draw_rect(rect, Color(0.9, 0.95, 1.0), false, 2.0)
+func update_selection_overlay() -> void:
+	selection_overlay.start_world = selection_origin
+	selection_overlay.end_world = selection_end
+	selection_overlay.is_active = show_selection_box
+	selection_overlay.queue_redraw()
 
 
 func refresh_hud() -> void:
@@ -267,7 +272,7 @@ func refresh_hud() -> void:
 	for counter in counters:
 		if counter.side == "player" and counter.selected:
 			names.append("%s [%s, %d/%d]" % [counter.unit_name, counter.formation, counter.strength, counter.max_strength])
-	var selected_description := ", ".join(names) if not names.is_empty() else "none"
+	var selected_description := ", ".join(PackedStringArray(names)) if not names.is_empty() else "none"
 	hud.text = "THIN RED LINE | tactical sandbox | FPS %d | LOS %.1f ms\n" % [Engine.get_frames_per_second(), los_last_ms]
 	hud.text += "WASD/arrows pan  Wheel zoom  LMB select/drag  Shift+LMB add  RMB move  Shift+RMB queue\n"
 	hud.text += "F line/column  X stop  C center  Space pause  +/- speed  F8 fog debug\n"

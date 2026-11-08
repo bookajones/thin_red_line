@@ -71,7 +71,7 @@ func stop() -> void:
 	orders.clear()
 
 
-func simulate_step(delta: float, terrain: Node2D) -> void:
+func simulate_step(delta: float, terrain) -> void:
 	if destroyed:
 		return
 	if formation_time > 0.0:

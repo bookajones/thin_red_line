@@ -48,7 +48,7 @@ func is_world_visible(side: String, world_point: Vector2) -> bool:
 	return is_cell_visible(side, floori(world_point.x / CELL_SIZE), floori(world_point.y / CELL_SIZE))
 
 
-func has_line_of_sight(start: Vector2, finish: Vector2, terrain: Node2D) -> bool:
+func has_line_of_sight(start: Vector2, finish: Vector2, terrain) -> bool:
 	var length := start.distance_to(finish)
 	if length < 0.001:
 		return true
@@ -72,7 +72,7 @@ func has_line_of_sight(start: Vector2, finish: Vector2, terrain: Node2D) -> bool
 	return true
 
 
-func can_detect(observer: Node2D, target: Node2D, terrain: Node2D) -> bool:
+func can_detect(observer, target, terrain) -> bool:
 	if observer.side == target.side or observer.destroyed or target.destroyed:
 		return false
 	var distance := observer.position.distance_to(target.position)
@@ -85,7 +85,7 @@ func can_detect(observer: Node2D, target: Node2D, terrain: Node2D) -> bool:
 	return distance <= allowed and has_line_of_sight(observer.position, target.position, terrain)
 
 
-func recalculate(observers: Array[Node2D], terrain: Node2D) -> bool:
+func recalculate(observers: Array, terrain) -> bool:
 	var anything_changed := false
 	for side in ["player", "enemy"]:
 		var new_visible := PackedByteArray()
