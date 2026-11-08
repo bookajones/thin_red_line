@@ -1,4 +1,5 @@
 extends Node2D
+class_name FormationCounter
 ## One formation counter is one tactical unit, not a collection of soldier actors.
 ## Visual counter geometry is deliberately separate from mechanical footprints.
 

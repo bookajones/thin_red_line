@@ -1,4 +1,5 @@
 extends Node2D
+class_name TacticalTerrain
 ## Runtime view of authoritative terrain data. Scout maps must never alter this state.
 
 var world_size: Vector2 = Vector2(3000.0, 2000.0)
@@ -34,7 +35,7 @@ func configure(definition: Dictionary) -> void:
 
 func terrain_at(world_point: Vector2) -> String:
 	# Bridge/ford take precedence over underlying river and road.
-	var kind := "plain"
+	var kind: String = "plain"
 	for feature in features:
 		var area: Rect2 = feature["rect"]
 		if not area.has_point(world_point):

@@ -1,4 +1,5 @@
 extends RefCounted
+class_name BattleFog
 ## Side-specific battlefield knowledge and LOS. No UI or AI side effects.
 ## First-slice LOS uses 8-unit sampling of authored rectangles. Exact raster
 ## forest DDA and exposed-footprint detection are parity work, not claimed here.
@@ -55,6 +56,8 @@ func has_line_of_sight(start: Vector2, finish: Vector2, terrain: Node2D) -> bool
 	var step_length := length / float(steps)
 	var forest_depth := 0.0
 	var village_depth := 0.0
+	var forest_touch: bool = terrain.blocker_at(start) == "forest" or terrain.blocker_at(finish) == "forest"
+	var village_touch: bool = terrain.blocker_at(start) == "village" or terrain.blocker_at(finish) == "village"
 	for i in range(steps):
 		var midpoint := start.lerp(finish, (float(i) + 0.5) / float(steps))
 		var obstacle: String = terrain.blocker_at(midpoint)
@@ -62,8 +65,6 @@ func has_line_of_sight(start: Vector2, finish: Vector2, terrain: Node2D) -> bool
 			forest_depth += step_length
 		elif obstacle == "village":
 			village_depth += step_length
-		var forest_touch: bool = terrain.blocker_at(start) == "forest" or terrain.blocker_at(finish) == "forest"
-		var village_touch: bool = terrain.blocker_at(start) == "village" or terrain.blocker_at(finish) == "village"
 		if forest_depth > (FOREST_EDGE_DEPTH if forest_touch else 0.0):
 			return false
 		if village_depth > (VILLAGE_EDGE_DEPTH if village_touch else 0.0):
