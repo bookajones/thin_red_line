@@ -4,6 +4,7 @@ class_name TacticalTerrain
 
 var world_size: Vector2 = Vector2(3000.0, 2000.0)
 var features: Array[Dictionary] = []
+var debug_terrain: bool = false
 
 const COLORS: Dictionary = {
 	"forest": Color("#536d53"),
@@ -78,3 +79,7 @@ func _draw() -> void:
 	for y in range(0, int(world_size.y) + 1, 200):
 		draw_line(Vector2(0, y), Vector2(world_size.x, y), Color(0.2, 0.2, 0.2, 0.12))
 	draw_rect(Rect2(Vector2.ZERO, world_size), Color("#3b4644"), false, 5.0)
+	if debug_terrain:
+		for feature in features:
+			var area: Rect2 = feature["rect"]
+			draw_rect(area, Color.YELLOW, false, 4.0)

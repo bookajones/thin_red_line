@@ -214,6 +214,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				if count > 0:
 					camera.position = group_center / float(count)
 			KEY_F8:
+				terrain.debug_terrain = not terrain.debug_terrain
+				terrain.queue_redraw()
+			KEY_F10:
 				fog_debug = not fog_debug
 				fog_sprite.visible = not fog_debug
 				refresh_visibility()
@@ -224,11 +227,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func zoom_at_cursor(factor: float) -> void:
-	var before := get_global_mouse_position()
+	# Preserve the point under the cursor without relying on a camera update mid-event.
+	var offset_from_center: Vector2 = get_viewport().get_mouse_position() - get_viewport_rect().size * 0.5
+	var before: Vector2 = camera.position + offset_from_center / camera.zoom.x
 	var next_zoom := clampf(camera.zoom.x * factor, 0.5, 2.0)
 	camera.zoom = Vector2(next_zoom, next_zoom)
-	var after := get_global_mouse_position()
-	camera.position += before - after
+	camera.position = before - offset_from_center / next_zoom
 	clamp_camera()
 
 
@@ -275,5 +279,5 @@ func refresh_hud() -> void:
 	var selected_description := ", ".join(PackedStringArray(names)) if not names.is_empty() else "none"
 	hud.text = "THIN RED LINE | tactical sandbox | FPS %d | LOS %.1f ms\n" % [Engine.get_frames_per_second(), los_last_ms]
 	hud.text += "WASD/arrows pan  Wheel zoom  LMB select/drag  Shift+LMB add  RMB move  Shift+RMB queue\n"
-	hud.text += "F line/column  X stop  C center  Space pause  +/- speed  F8 fog debug\n"
+	hud.text += "F line/column  X stop  C center  Space pause  +/- speed  F8 terrain debug  F10 fog reveal\n"
 	hud.text += "Speed %.1fx | %s | Selected: %s" % [float(GAME_SPEEDS[game_speed_index]), "PAUSED" if paused else "RUNNING", selected_description]

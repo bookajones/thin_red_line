@@ -25,7 +25,8 @@
 | C | Center on selected formation(s) |
 | Space | Pause/resume simulation |
 | +/- | Change speed 0.5× / 1× / 2× / 4× |
-| F8 | Debug-only reveal of enemy units and removal of fog overlay |
+| F8 | Toggle terrain annotation debug outlines (legacy terrain debug intent) |
+| F10 | Developer-only fog/enemy omniscient reveal |
 
 The fog model tracks per-side discovered terrain and current visibility with 32-world-unit cells, 300-unit observation radius and provisional rectangular terrain occlusion. Enemy counters are hidden unless tactically detected. The fog is a single low-resolution GPU texture, updated at 10 Hz rather than recreating thousands of translucent Pygame rectangles each frame. Neither combat nor automated enemy movement is implemented in this initial PR. **The historical PNG map/counter art is not yet transferred; the sandbox deliberately uses temporary cartographic rectangles.**
 

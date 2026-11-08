@@ -25,7 +25,7 @@ In Godot the foundation uses \`ImageTexture\` with \`update(image)\` so terrain 
 - [ ] WASD/arrows pan, cursor-focused mouse zoom, C center, pause, 0.5×/1×/2×/4×.
 - [ ] Move into and out of visibility; old terrain stays dim/discovered while enemy units disappear when not detected.
 - [ ] Enter the river and verify movement blocks without a crossing; bridge/ford cells are valid terrain.
-- [ ] F8 is **developer-only omniscient debug** and toggles overlay/enemy reveal; not intended as gameplay.
+- [ ] F8 shows terrain annotation debug outlines; F10 is **developer-only omniscient reveal** and toggles fog/enemy presentation.
 - [ ] Verify frame duration and LOS ms while multiple units move; record actual measurements.
 
 ## Later critical regression suite
