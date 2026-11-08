@@ -1,0 +1,78 @@
+{
+  "id": "test",
+  "name": "Fictional tactical test battlefield",
+  "width": 3000,
+  "height": 2000,
+  "terrain": [
+    {
+      "type": "forest",
+      "x": 200,
+      "y": 650,
+      "width": 550,
+      "height": 400
+    },
+    {
+      "type": "forest",
+      "x": 1550,
+      "y": 150,
+      "width": 450,
+      "height": 350
+    },
+    {
+      "type": "hill",
+      "x": 1050,
+      "y": 250,
+      "width": 550,
+      "height": 450
+    },
+    {
+      "type": "marsh",
+      "x": 650,
+      "y": 1450,
+      "width": 650,
+      "height": 350
+    },
+    {
+      "type": "village",
+      "x": 1900,
+      "y": 900,
+      "width": 350,
+      "height": 250
+    },
+    {
+      "type": "road",
+      "x": 100,
+      "y": 1030,
+      "width": 2700,
+      "height": 60
+    },
+    {
+      "type": "road",
+      "x": 2050,
+      "y": 150,
+      "width": 60,
+      "height": 1550
+    },
+    {
+      "type": "river",
+      "x": 2420,
+      "y": 100,
+      "width": 140,
+      "height": 1800
+    },
+    {
+      "type": "bridge",
+      "x": 2390,
+      "y": 980,
+      "width": 200,
+      "height": 160
+    },
+    {
+      "type": "ford",
+      "x": 2390,
+      "y": 1550,
+      "width": 200,
+      "height": 130
+    }
+  ]
+}
