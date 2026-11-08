@@ -38,7 +38,7 @@ In PowerShell on Windows, using the local Godot console binary:
 & "D:\Workspace\godot\Godot_v4.7.2-stable_win64_console.exe" --headless --path . --script tests/verify_foundation.gd
 ~~~
 
-Or, when Godot is on PATH: \`godot --headless --path . --script tests/verify_foundation.gd\`.
+Or, when Godot is on PATH: `godot --headless --path . --script tests/verify_foundation.gd`.
 
 See [manual QA & performance plan](docs/PERFORMANCE_AND_QA.md). Headless validation has to be executed on a machine with Godot installed; publishing this PR does not assert that a local Godot run has occurred.
 

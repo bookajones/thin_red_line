@@ -4,12 +4,12 @@
 
 The original Pygame LOS code tested many rays against raster forest masks. Original project notes (2026-10-16) reported ~4.6–5.2 FPS with the initial full raster LOS; disabling mask only for diagnosis recovered ~55–58 FPS. DDA early exits improved ~9.5–13 FPS, observer caching yielded ~52–57 FPS idle with moving-army dips ~26–30 FPS. The later 0.1 s cooldown and two-observer queue logged ~55–58 FPS in sampled sessions, with remaining spikes. These are **historical observations** in Python, not Godot performance results.
 
-In Godot the foundation uses \`ImageTexture\` with \`update(image)\` so terrain masking is GPU composited as a single 94×63 grid image in a 3000×2000 world. This addresses repeated tile drawing but **does not inherently optimize tactical LOS**. CPU LOS remains a separate measurement. Never mistake average FPS for p95/p99 frame time.
+In Godot the foundation uses `ImageTexture` with `update(image)` so terrain masking is GPU composited as a single 94×63 grid image in a 3000×2000 world. This addresses repeated tile drawing but **does not inherently optimize tactical LOS**. CPU LOS remains a separate measurement. Never mistake average FPS for p95/p99 frame time.
 
 ## Measurements required before accepting G0/G3
 
-- Headless validation: \`godot --headless --path . --script tests/verify_foundation.gd\`. Interpret non-zero exit/error output as a failure, not a pass.
-- Interactive Windows: launch scene F5, monitor FPS + \`LOS ms\` HUD, verify stable units and no parse errors in the Godot debugger.
+- Headless validation: `godot --headless --path . --script tests/verify_foundation.gd`. Interpret non-zero exit/error output as a failure, not a pass.
+- Interactive Windows: launch scene F5, monitor FPS + `LOS ms` HUD, verify stable units and no parse errors in the Godot debugger.
 - Test: no move; one observer marching; 5+ moving observers; several groups continuously moving; combat once ported; 0.5×, 1×, 2×, 4×; pause; zoom while marching; both historical and test maps when present.
 - At 1280×720 and 1600×900 measure FPS and, in later diagnostics, average/p95/p99/max frame-time, visibility_ms, renderer_ms, texture updates per second, cache hits, memory and map size.
 - Stress map sizes: 3000×2000, 6000×4000, then 10000×8000; scale army size and obstacle density deliberately.

@@ -1,6 +1,6 @@
 # Thin Red Line — game design contract
 
-**Same game as \`bookajones/python-strategy\`.** This document restates its approved design for a Godot codebase; nothing here authorizes changing game genre, unit scale, period or simulation rules. The Python implementation is a reference for existing mechanics. The old project's [milestone](reference/PYTHON_STRATEGY_MILESTONES.md) and [backlog](reference/PYTHON_STRATEGY_BACKLOG.md) snapshots preserve granular decisions.
+**Same game as `bookajones/python-strategy`.** This document restates its approved design for a Godot codebase; nothing here authorizes changing game genre, unit scale, period or simulation rules. The Python implementation is a reference for existing mechanics. The old project's [milestone](reference/PYTHON_STRATEGY_MILESTONES.md) and [backlog](reference/PYTHON_STRATEGY_BACKLOG.md) snapshots preserve granular decisions.
 
 ## Identity, audience and product
 
