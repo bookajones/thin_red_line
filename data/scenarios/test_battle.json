@@ -1,0 +1,99 @@
+{
+  "id": "test_battle",
+  "seed": 12345,
+  "map": "res://data/maps/test_map.json",
+  "note": "Direct transfer of Python prototype test deployment: x/y are top-left, not center.",
+  "units": [
+    {
+      "id": "p_inf_1",
+      "name": "1st Infantry",
+      "unit_type": "infantry",
+      "x": 1300,
+      "y": 1300,
+      "side": "player",
+      "angle": 0,
+      "weapon": "minie_rifle"
+    },
+    {
+      "id": "p_inf_4",
+      "name": "4th Infantry",
+      "unit_type": "infantry",
+      "x": 1700,
+      "y": 1400,
+      "side": "player",
+      "angle": 0,
+      "weapon": "minie_rifle"
+    },
+    {
+      "id": "p_hq",
+      "name": "Headquarters",
+      "unit_type": "hq",
+      "x": 1500,
+      "y": 1800,
+      "side": "player",
+      "angle": 0,
+      "weapon": null
+    },
+    {
+      "id": "p_cav_6",
+      "name": "6th Cavalry",
+      "unit_type": "cavalry",
+      "x": 1300,
+      "y": 1000,
+      "side": "player",
+      "angle": 0,
+      "weapon": null
+    },
+    {
+      "id": "p_art_a",
+      "name": "A Battery",
+      "unit_type": "artillery",
+      "x": 700,
+      "y": 150,
+      "side": "player",
+      "angle": 0,
+      "weapon": "field_gun"
+    },
+    {
+      "id": "e_inf",
+      "name": "Enemy Dummy",
+      "unit_type": "infantry",
+      "x": 850,
+      "y": 450,
+      "side": "enemy",
+      "angle": 0,
+      "weapon": "minie_rifle"
+    },
+    {
+      "id": "e_cav",
+      "name": "Enemy Cavalry",
+      "unit_type": "cavalry",
+      "x": 800,
+      "y": 350,
+      "side": "enemy",
+      "angle": 0,
+      "weapon": null,
+      "attack_at_will": true
+    },
+    {
+      "id": "e_art",
+      "name": "Enemy Battery",
+      "unit_type": "artillery",
+      "x": 1050,
+      "y": 350,
+      "side": "enemy",
+      "angle": 0,
+      "weapon": "field_gun"
+    },
+    {
+      "id": "e_hq",
+      "name": "Enemy Headquarters",
+      "unit_type": "hq",
+      "x": 1150,
+      "y": 500,
+      "side": "enemy",
+      "angle": 0,
+      "weapon": null
+    }
+  ]
+}

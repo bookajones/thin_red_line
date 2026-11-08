@@ -1,0 +1,21 @@
+{
+  "smoothbore_musket": {
+    "effective_range": 150,
+    "preferred_range": 75,
+    "reload_time": 5,
+    "base_hit_chance": 0.03
+  },
+  "minie_rifle": {
+    "effective_range": 220,
+    "preferred_range": 110,
+    "reload_time": 5,
+    "base_hit_chance": 0.05
+  },
+  "field_gun": {
+    "effective_range": 450,
+    "preferred_range": 300,
+    "reload_time": 8,
+    "base_hit_chance": 0.2,
+    "casualties_per_hit": 3
+  }
+}
