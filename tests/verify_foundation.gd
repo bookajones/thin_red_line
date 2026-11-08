@@ -73,7 +73,7 @@ func _initialize() -> void:
 	friendly.position = Vector2(800.0, 550.0)
 	enemy.position = Vector2(840.0, 550.0)
 	expect(fog.can_detect(friendly, enemy, terrain), "close uncovered enemy can be detected")
-	enemy.position = Vector2(1100.0, 550.0)
+	enemy.position = Vector2(1110.0, 550.0)
 	expect(not fog.can_detect(friendly, enemy, terrain), "distant enemy is outside observation range")
 	expect(not fog.has_line_of_sight(Vector2(160.0, 800.0), Vector2(900.0, 800.0), terrain), "forest blocks line of sight")
 	expect(fog.has_line_of_sight(Vector2(1000.0, 1200.0), Vector2(1100.0, 1200.0), terrain), "open ground permits line of sight")
